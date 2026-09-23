@@ -1,0 +1,56 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+	id 'jacoco'
+}
+
+group = 'com.pragma.powerup'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	springBootVersion = "2.7.3"
+	mapstructVersion = "1.5.2.Final"
+	lombokVersion = "1.18.24"
+	lombokMapstructBindingVersion = "0.2.0"
+	mySqlConnectorVersion = "8.0.32"
+	openApiVersion = "1.6.11"
+}
+
+dependencies {
+	implementation "io.jsonwebtoken:jjwt-api:0.11.5"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:0.11.5"
+	runtimeOnly "io.jsonwebtoken:jjwt-jackson:0.11.5"
+	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	implementation "com.twilio.sdk:twilio:9.14.0"
+	implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
+	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openApiVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+	finalizedBy jacocoTestReport
+}

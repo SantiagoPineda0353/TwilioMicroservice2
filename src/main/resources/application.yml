@@ -1,0 +1,15 @@
+server:
+  port: 8084
+
+twilio:
+  account-sid:
+  auth-token:
+  from-number:
+
+jwt:
+  secret:
+
+app:
+  appDescription: "Pragma Powerup"
+  appVersion: "1.0.0"
+
